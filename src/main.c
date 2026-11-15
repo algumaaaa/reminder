@@ -15,10 +15,10 @@ void detach() {
 }
 
 int main(int argc, char *argv[]) {
-  if (argc == 0) {
+  if (argc <= 1) {
     printf("Usage: reminder time message\n");
     printf("Time must be formatted as HH:MM\n");
-    printf("Message is optional.")
+    printf("Message is optional and in case of multi-word must be encased in double quotes.");
     return 1;
   }
   if (strlen(argv[1]) != 5) {
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 
   notify_init("reminder");
   NotifyNotification *notif = notify_notification_new(
-      "Hello, world!", "My Notification", "dialog-information");
+      "Reminder!", argv[2], "dialog-information");
   notify_notification_show(notif, NULL);
   g_object_unref(G_OBJECT(notif));
   notify_uninit();
